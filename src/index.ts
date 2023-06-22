@@ -21,11 +21,30 @@ app.get("/accounts", (req: Request, res: Response) => {
 })
 
 app.get("/accounts/:id", (req: Request, res: Response) => {
-    const id = req.params.id
 
-    const result = accounts.find((account) => account.id === id) 
+    try {
+        
+        const id = req.params.id
+    
+        const result = accounts.find((account) => account.id === id) 
 
-    res.status(200).send(result)
+        if (!result) {
+            res.status(404);
+            throw new Error("Não achamo");
+        }
+    
+        res.status(200).send(result)
+
+    } catch ( error: any ) {
+
+        console.log(error);
+
+        if(res.statusCode === 200) {
+            res.status(500);
+        }
+
+    }
+
 })
 
 app.delete("/accounts/:id", (req: Request, res: Response) => {
