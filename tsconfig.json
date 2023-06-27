@@ -1,3 +1,20 @@
+// {
+//     "compilerOptions": {
+//       "target": "ES6",
+//       "module": "commonjs",
+//       "sourceMap": true,
+//       "outDir": "./build",
+//       "rootDir": "./src",
+//       "removeComments": true,
+//       "noImplicitAny": true,
+//       "noEmitOnError": true,
+//       "esModuleInterop": true,
+//       "strict": true,
+//       "strictPropertyInitialization": false, 
+//       "strictNullChecks": false   
+//     }
+//   }
+
 {
     "compilerOptions": {
         "target": "ES6", /* Specify ECMAScript target version */

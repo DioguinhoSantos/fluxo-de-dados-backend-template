@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express'
+import express, { Request, Response } from 'express';
 import cors from 'cors'
 import { accounts } from './database'
 import { ACCOUNT_TYPE } from './types'
@@ -38,10 +38,7 @@ app.get("/accounts/:id", (req: Request, res: Response) => {
     } catch ( error: any ) {
 
         console.log(error);
-
-        if(res.statusCode === 200) {
-            res.status(500);
-        }
+        res.status(500).send(error.message);       
 
     }
 
