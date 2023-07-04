@@ -24,12 +24,12 @@ app.get("/accounts/:id", (req: Request, res: Response) => {
 
     try {
         
-        const id = req.params.id
+        const id = String(req.params.id)
     
         const result = accounts.find((account) => account.id === id) 
 
         if (!result) {
-            res.status(404);
+            res.statusCode = 404;
             throw new Error("Não achamo");
         }
     
@@ -38,22 +38,42 @@ app.get("/accounts/:id", (req: Request, res: Response) => {
     } catch ( error: any ) {
 
         console.log(error);
-        res.status(500).send(error.message);       
+        res.status(400).send(error.message);       
 
     }
 
 })
 
 app.delete("/accounts/:id", (req: Request, res: Response) => {
-    const id = req.params.id
+    
+    try {
+        
+        const id = req.params.id
+    
+        const accountIndex = accounts.findIndex((account) => account.id === id)
+        const result = accounts.find((account) => account.id === id)
 
-    const accountIndex = accounts.findIndex((account) => account.id === id)
+        if (id[0] !== 'a') {
+            res.statusCode = 400;
+            throw new Error('id deve começar com a');
+        }
 
-    if (accountIndex >= 0) {
-        accounts.splice(accountIndex, 1)
+        if (!result){
+            res.statusCode = 400;
+            throw new Error('Não encontrado')
+        }
+        
+        if (accountIndex >= 0) {
+            accounts.splice(accountIndex, 1)
+        }
+
+        res.status(200).send("Item deletado com sucesso")
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).send(error.message);  
     }
-
-    res.status(200).send("Item deletado com sucesso")
+    
 })
 
 app.put("/accounts/:id", (req: Request, res: Response) => {
