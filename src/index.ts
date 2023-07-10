@@ -32,6 +32,7 @@ app.get("/accounts/:id", (req: Request, res: Response) => {
       throw new Error('tem que começar com "a"');
     }
 
+
     if (!result) {
       res.statusCode = 401;
       throw new Error("Não achamo");
@@ -49,6 +50,7 @@ app.get("/accounts/:id", (req: Request, res: Response) => {
 });
 
 app.delete("/accounts/:id", (req: Request, res: Response) => {
+
   try {
     const id = req.params.id;
 
